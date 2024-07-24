@@ -35,7 +35,7 @@ class PostController extends Controller
             'body' => ['min:3', 'required'],
         ]);
 
-        $data['user_id'] = 1;
+        $data['user_id'] = auth()->id();
 
         return Post::create($data);
     }

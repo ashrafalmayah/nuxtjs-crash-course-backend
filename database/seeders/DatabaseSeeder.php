@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         User::find(1)->update([
             'name' => 'ashraf',
             'email' => 'ashraf@gmail.com',
+            'password' => '1234'
         ]);
     }
 }
