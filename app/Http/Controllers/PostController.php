@@ -53,15 +53,24 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        \Gate::authorize('update', $post);
+
+        return $post->load('user:id,name');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
-        //
+        \Gate::authorize('update', $post);
+
+        $data = $request->validate([
+            'title' => ['min:3', 'required'],
+            'body' => ['min:3', 'required'],
+        ]);
+
+        return $post->update($data);
     }
 
     /**
@@ -69,6 +78,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        \Gate::authorize('delete', $post);
+
+        $post->delete();
     }
 }
